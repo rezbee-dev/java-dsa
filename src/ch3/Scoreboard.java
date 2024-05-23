@@ -1,5 +1,7 @@
 package src.ch3;
 
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 // Only stores limited number of scores
@@ -29,24 +31,40 @@ public class Scoreboard {
         }
     }
 
-    public GameEntry remove(int index){
-        if(index >= this.numEntries) throw new IndexOutOfBoundsException();
-        var removed = this.board[index];
-        this.board[index]=null;
-        int next = index + 1;
-        while(next < numEntries) {
-            this.board[next-1] = this.board[next];
-            next++;
+    public GameEntry remove(int i) throws IndexOutOfBoundsException {
+        if(i < 0 || i >= this.numEntries) 
+            throw new IndexOutOfBoundsException("Invalid index: " + i);
+        
+        // shift games
+        GameEntry temp = this.board[i];
+        // from index to be removed, to games after it
+        for(int j = i; j < this.numEntries - 1; j++){
+            // shift games after index to be removed, up
+            this.board[j] = this.board[j+1];
         }
-        return removed;
+
+        // null out last old score, since its been shifted up already
+        this.board[this.numEntries - 1] = null;
+        this.numEntries--;
+
+        return temp;
     }
 
-    public static void main(String[] args) {
-        int letter = 65;
-        int score = 5;
-        var entries = Stream.generate(() => {
-            String name = Character.
-            var entry = new GameEntry(Integer.t, score)
-        })
+    // my implemention - untested
+    // public GameEntry remove(int index){
+    //     if(index >= this.numEntries) throw new IndexOutOfBoundsException();
+    //     var removed = this.board[index];
+    //     this.board[index]=null;
+    //     int next = index + 1;
+    //     while(next < numEntries) {
+    //         this.board[next-1] = this.board[next];
+    //         next++;
+    //     }
+    //     return removed;
+    // }
+
+    @Override
+    public String toString(){
+        return this.board.toString();
     }
 }
