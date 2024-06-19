@@ -76,8 +76,78 @@ Pseudocode:
       return // list is empty
     currHead = currHead.next
     size--
-```
+  ```
 
 - removeLast
   - requires pointer to `prev` on node for easy removal (see doubly linkedlist)
     - otherwise, requires traversing from head to tail
+
+## CH 6 - Stacks, Queues, And Deques
+
+Stack
+- Last-in, Last Out (LIFO)
+- Can only access most recently inserted object (top of stack)
+
+Code examples using Stack
+- Reverse an array
+
+  ```java
+  // Push arrays into stack, then pop off the elements
+  public static<E> void reverse(E[] a){
+    Stack<E> buffer = new StackArray<>(a.length);
+
+    for (int i=0; i<a.length; i++>) buffer.push(a[i]);
+    for (int i=0; i<a.length; i++>) a[i] = buffer.pop();
+  }
+  ```
+
+- Matching delimiters
+
+```java
+// Take string input
+// When delimiter opening symbol is encountered, push to stack
+// When delimiter closing symbol is encountered, pop off stack
+// If end of string and stack is empty, then string had matching delimiters
+// O(n)
+
+public static boolean isMatched(String expression) {
+  final String opening = "({["; // opening delimiters
+  final String closing = "]})"; // closing delimiters
+  Stack<Character> buffer = new StackSinglyLinkedList<>();
+  for (char c: expression.toCharArray()){
+    if(opening.indexOf(c) != -1) buffer.push(c); //opening delimter matched
+    else if(closing.indexOf(c) != -1){ // closing delimiter matched
+      if(buffer.isEmpty()) return false;
+      // mismatched delimiter
+      // matching via position of the characters in opening and closing
+      if(closing.indexOf(c) != opening.indexOf(buffer.pop())) return false; 
+    }
+  }
+  return buffer.isEmpty();
+}
+```
+
+```java
+// Tests if every opening tag has a matching closing tag, in a HTML string
+public static boolean isHTMLMatched(String html){
+  Stack<String> buffer = new StackSingledLinkedList<>();
+  int j = html.indexOf('<'); // find first '<' if any
+
+  while(j != -1) {
+    // indexOf(int ch, int fromIndex) - starting from index, so after index of j
+    int k = html.indexOf('>', j+1);
+    if (k == -1) return false; // invalid html tag
+
+    String tag = html.substring(j+1, k); // extract contents inside <>
+
+    if(!tag.startsWith("/")) // opening tag
+      buffer.push(tag);
+    else { // closing tag
+      if(buffer.isEmpty()) return false; // no opening tag present
+      if(!tag.substring(1).equals(buffer.pop())) return false; // different, mismatched tag
+    }
+    j = html.indexOf('<', k+1); // find next '<' if any
+  }
+  return buffer.isEmpty();
+}
+```

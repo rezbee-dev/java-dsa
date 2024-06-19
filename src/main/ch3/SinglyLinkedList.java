@@ -1,4 +1,4 @@
-package src.ch3;
+package src.main.ch3;
 
 public class SinglyLinkedList<E> {
 
