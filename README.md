@@ -84,7 +84,7 @@ Pseudocode:
 
 ## CH 6 - Stacks, Queues, And Deques
 
-Stack
+### Stack
 - Last-in, Last Out (LIFO)
 - Can only access most recently inserted object (top of stack)
 
@@ -151,3 +151,29 @@ public static boolean isHTMLMatched(String html){
   return buffer.isEmpty();
 }
 ```
+
+### Queues
+- FIFO - first in, first out
+- Oldest elements removed first
+- Elements enter at the back and are removed from front
+  - AKA lines at register (enter from back, and those at front removed first)
+
+Array-based Implementation Considerations
+- Loops based operations
+  - Enqueue : Elements can be stored in an array, such that first element is at index 0, second at index 1, etc
+  - Dequeue Operation: remove element stored at index 0 and execute a loop to shift all other elements of the queue oe cell to the left (towards index 0, to replace the removal)
+    - Results in O(n) runtime
+- No loops
+  - Enqueue: insert element and use variable `frontIndex` to represent index of element at front of queue
+  - Dequeue: Replace removed element with null and avoid shifting elements 
+  - Issue is that as you remove and shift `frontIndex`, you may reach the end of the array, even when there are fewer than N elements in the queue
+- Circular based operations
+  - `frontIndex` is shifted right towards end of array with each dequeue operation
+  - wraps around the end of the array via modulo operation
+  - Operation: `frontIndex = (frontIndex + 1) % N`
+  - If `N = 10`, and `frontIndex = 9`, then the next dequeue operation will be `(9+1) % 10`, resulting in the `frontIndex` to wrap around to index 0
+  - For Enqueue operations, you need to add element to the "end" of the array
+    - Since we are using circular array, to get to the end, you add `frontIndex` and `size` (total number of elements) and modulo by N to get the index of the end of the queue
+
+Note: skipped Circular Queue
+Note: skipped Josephus problem exercise
