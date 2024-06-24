@@ -82,6 +82,17 @@ Pseudocode:
   - requires pointer to `prev` on node for easy removal (see doubly linkedlist)
     - otherwise, requires traversing from head to tail
 
+**Doubly Linked List**
+
+Components:
+- Header & Trailer Sentinels
+  - AKA dummy nodes, guards, etc
+  - Specials nodes located at both ends of the list
+  - Header = beginning of list, Trailer = ending of list
+  - Does not store elements
+  - Takes up extra space, but greatly simplifies logic of operations (especially for edge cases)
+  - All insertions/ Deletions occur between sentinels
+
 ## CH 6 - Stacks, Queues, And Deques
 
 ### Stack
@@ -177,3 +188,23 @@ Array-based Implementation Considerations
 
 Note: skipped Circular Queue
 Note: skipped Josephus problem exercise
+
+### Dequeue
+
+- AKA double-ended queue
+- Supports insertion and deletion at both the front and back of the queue
+
+Circular Array Implementation
+- Where head and size are stored as fields
+  - tail is calculated via modular arithmetic
+- Negative values with modulo operator
+  - When element inserted at front, head index is decremeted circularly
+  - Usually, modulo operation looks like this: `head = (head - 1) % size`
+  - In order to avoid negative values, modulo operation should look like: `f = (f-1+size) % size`
+
+Doubly Linked List Implementation
+- DoublyLinkedList already imlpements all Deque oeprations
+
+Running times
+- O(1) runtime
+- O(N) spacetime for array based, and O(n) spacetime for doubly linked list, where n < N
