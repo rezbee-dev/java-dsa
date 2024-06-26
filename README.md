@@ -208,3 +208,9 @@ Doubly Linked List Implementation
 Running times
 - O(1) runtime
 - O(N) spacetime for array based, and O(n) spacetime for doubly linked list, where n < N
+
+## CH 7 - List and Iterators
+
+- Stack, queue, deque, and linked lists data structures don't offer straightforward way to do arbitrary element access without having to traverse through the data structure
+- 
+
