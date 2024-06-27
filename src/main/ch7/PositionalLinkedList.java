@@ -1,6 +1,10 @@
 // Uses DoublyLinkedList implementation (sort of)
 // All operations are O(1) runtime, O(n) spacetime
-public class PositionalLinkedList<E> implements PositionalList<E> {
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class PositionalLinkedList<E> implements PositionalList<E>, Iterable<E> {
 
     private Node<E> header;
     private Node<E> trailer;
@@ -106,6 +110,15 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
         return item;
     }
 
+    public Iterator<E> iterator() {
+        return new ElementIterator();
+    }
+
+    // returns iterable representation of list's positions
+    public Iterable<Position<E>> positions() {
+        return new PositionIterable();
+    }
+
     // Nested Node class
     private static class Node<E> implements Position<E> {
         private E element;
@@ -144,5 +157,51 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
         public void setNext(Node<E> n){
             this.next = n;
         }
-    }   
+    }
+    
+    // Maintains position of the next element to be returned, not just index
+    private class PositionIterator implements Iterator<Position<E>>{
+        private Position<E> cursor = PositionalLinkedList.this.first(); // position of the next element
+        private Position<E> recent = null; // position of last next element
+
+        public boolean hasNext() {
+            return this.cursor != null;
+        }
+
+        public Position<E> next() throws NoSuchElementException {
+            if (this.cursor == null) throw new NoSuchElementException("no more elements");
+            this.recent = this.cursor; // set up for removal
+            this.cursor = PositionalLinkedList.this.after(this.cursor); // set up for next element
+            return this.recent;
+        }
+
+        public void remove() throws IllegalStateException {
+            if(this.recent == null) throw new IllegalStateException("nothing to remove");
+            PositionalLinkedList.this.remove(this.recent);
+            this.recent = null; // do not allow remove again until next() is called
+        }
+    }
+
+    // Constructs PositionIterator object each time its iterator() is called
+    // See outer class's positions()
+    private class PositionIterable implements Iterable<Position<E>> {
+        public Iterator<Position<E>> iterator() {
+            return new PositionIterator();
+        }
+    }
+
+    // Adapts the iteration produced by positions to return elements (ex: simplified for-each expressions)
+    private class ElementIterator implements Iterator<E> {
+        Iterator<Position<E>> posIterator = new PositionIterator();
+        public boolean hasNext() {
+            return this.posIterator.hasNext();
+        }
+        public E next() {
+            return this.posIterator.next().getElement();
+        }
+
+        public void remove() {
+            this.posIterator.remove();
+        }
+    }
 }

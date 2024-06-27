@@ -230,3 +230,27 @@ Running times
     - When insertions or deletions occur, can loop through the array to update the index variable
     - Runtime will be O(n) for insertions and removals, and O(1) for all other operations
 
+### Iterators
+
+Iterator
+- Software design pattern that abstracts the process of scanning through a sequence of elements, one element at a time
+- independent from storage mechanism
+- typically features the following operations
+  - hasNext()
+  - next()
+  - remove()
+- a single iterator instance supports only one pass through a collection, and there is no way to reset the iterator back to the beginning of the sequence
+  - to allow repeated iterations, data structure should support a method that returns a new iterator each time its invoked
+  - in java, it allows the for-each loops to work
+    - for-each is shorthand for `while(i.hasNext()){...}`
+
+snapshot iterator
+- maintains its own private copy of the sequence of elements, which is constructed at the time the iterator object is created
+- is therefore unaffected by any subsequent changes to the primary collection that may occur after snapshot iterator is created
+- O(N) runtime and O(n) spacetime upon construction
+
+lazy iterator
+- does not make a copy of the elements, and performs piecewise traversal of the primary structure only when `next()` is invoked
+- O(1) for runtime and space when constructed
+- is affected by changes to the primary structure before iteration is completed
+  - can include "fail-fast" behavior that immediately invalidates the iterator if underlying collection is modified unexpectedly

@@ -1,8 +1,11 @@
 // For non-dynamic array, All operations are O(1) time complexity except for add & remove which is O(n)
 // For dynamic array, runtimes are still the same; see ch7.2 for discussions on amortizations regarding the resizing
+// Adding ArrayIterator & Iterator from 7.4
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class ArrayList<E> implements List<E> {
+public class ArrayList<E> implements List<E>, Iterable<E> {
     // default array capacity
     public static final int CAPACITY = 16;
     private E[] data;
@@ -89,5 +92,34 @@ public class ArrayList<E> implements List<E> {
             temp[k] = this.data[k]; // deep copy
         }
         this.data = temp; // set internal array to new resized array
+    }
+
+    public Iterator<E> iterator(){
+        return new ArrayIterator();
+    }
+
+    private class ArrayIterator implements Iterator<E> {
+        private int j; // index of the next element to report
+        private boolean removable = false; // denotes whether remove() can be called at this time
+
+        public boolean hasNext() {
+            return this.j < size; // size field in outer class
+        }
+
+        public E next() throws NoSuchElementException {
+            if(this.j == size) throw new NoSuchElementException("No next element");
+            this.removable = true;
+            // data field of outer class
+            // post increment j so its ready for future next call
+            return data[this.j++]; 
+        }
+
+        // removes the element returned by most recent call to next
+        public void remove() throws IllegalStateException {
+            if(!this.removable) throw new IllegalStateException("nothing to remove");
+            ArrayList.this.remove(j-1); // remove the last element that was returned from next()
+            this.j--; // decrement because removal will shift leftwards
+            this.removable = false; // do not allow remove again until next is called 
+        }
     }
 }
