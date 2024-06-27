@@ -212,5 +212,21 @@ Running times
 ## CH 7 - List and Iterators
 
 - Stack, queue, deque, and linked lists data structures don't offer straightforward way to do arbitrary element access without having to traverse through the data structure
-- 
+
+### Positional Lists
+- Numerical indexes are not the best choice to represent the concept of "position" of an element
+  - ex: index of an entry changes over time due to insertions and deletions, changing the index of the element
+  - ex: numerical position of element in an linked list is not useful, as you still need to traverse the list to get to it
+- Need an abstraction to be able to provide a way to refer to elements anywhere in the sequence and to perform arbitrary insertions and deletions
+  - this abstraction would denote the position of an element without it changing even if the index of the element changes
+- The Positional List ADT is like a java list, except it does not use index-based methods
+  - its methods return element's _position_ rather than elements themselves
+  - purpose of returning position is that it allows you to use it to further traverse the list
+  - Uses doublylinkedlist for implementation
+  - index-based array implementation is possible
+    - Problem is that index changes when elements are inserted or deleted 
+    - instead of storing elements directly into the underlying array, store a "position" object containing the element as well as the current index of the element in the list (Ex: `(0, BWI)`)
+    - Allows you to determine the index associated with a position, and position associated with index
+    - When insertions or deletions occur, can loop through the array to update the index variable
+    - Runtime will be O(n) for insertions and removals, and O(1) for all other operations
 
