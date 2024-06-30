@@ -254,3 +254,24 @@ lazy iterator
 - O(1) for runtime and space when constructed
 - is affected by changes to the primary structure before iteration is completed
   - can include "fail-fast" behavior that immediately invalidates the iterator if underlying collection is modified unexpectedly
+
+
+### Java Collection Framework
+
+Collection Interface
+- Root interface for many java data structures that represents a collection of elements
+- Includes general methods such as `size(), isEmpty(), iterator()`
+
+Concurrency
+- Data structure with concurrency support that allow multiple processes to share use of a data structure in a thread-safe manner
+
+Blocking
+- data structures that are blocking have operations where it will wait until some other operation completes, either to free up space or insert an element
+
+Java List Iterators
+- Java LinkedList class does not expose `position` like our `LinkedList` class does
+- Instead, it uses a `ListIterator` that is returned by LinkedList's `listIterator()` method
+- This iterator uses a list cursor  and provides methods for traversing list and getting index and modifying content
+- To avoid issues, iterators have "fail-fast" feature that invalidates iterator if underlying collection is modified unexpectedly
+  - there can be many iterators traversing through a list, but if one of them modifies the list, then all other iterators become invalid
+  - iterators can also become invalid if the list modifies itself
