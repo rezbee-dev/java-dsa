@@ -275,3 +275,29 @@ Java List Iterators
 - To avoid issues, iterators have "fail-fast" feature that invalidates iterator if underlying collection is modified unexpectedly
   - there can be many iterators traversing through a list, but if one of them modifies the list, then all other iterators become invalid
   - iterators can also become invalid if the list modifies itself
+
+Sorting a Positional List
+
+```java
+public static void insertSort(PositionalLinkedList<Integer> list){
+  // last position known to be sorted
+  Position<Integer> marker = list.first();
+
+  while(marker != list.last()){
+    Position<Integer> pivot = list.after(marker);
+    // element to be sorted
+    int value = pivot.getElement();
+    if (value > marker.getElement())
+      marker = pivot;
+    else {
+      // to find leftmost item greater than value
+      Position<Integer> walk = marker;
+      while (walk != list.first() && list.before(walk).getElement() > value){
+        walk = list.before(walk);
+      }
+      list.remove(pivot);
+      list.addBefore(walk, value);
+    }
+  }
+}
+```
