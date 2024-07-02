@@ -301,3 +301,12 @@ public static void insertSort(PositionalLinkedList<Integer> list){
   }
 }
 ```
+
+### Case Study: Maintaining Access Frequencies
+- Purpose: create a datastructure that maintains a collection of elements while keeping track of the number of times each element is accessed
+  - To know which elements are among the most popular
+- Example: User's most accessed pages; Playlist of most frequently played songs
+- ADT
+  - `access(e)`: Accesses element and adds to favorites list if not already present, and increments access count
+  - `remove(e)` removes element from favorites list if present
+  - `getFavorites(k)`: returns an iterable collection of the `k` most accessed elements
