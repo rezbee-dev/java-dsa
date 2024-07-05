@@ -341,3 +341,34 @@ Depth
 Height
 - Height of tree equal to the maximum depth of its leaf elements, or 0 if tree is empty
   - don't count the root
+
+Level
+- all nodes of tree T at the same depth d
+
+### Binary Trees
+
+Binary Tree
+- Ordered tree
+- Properties
+  - Every node has at most two children
+  - Each child node is labeled as being either a left child or right child
+  - Left child precedes a right child in the order of children of a node
+
+Subtree
+- left and right subtrees are rooted at a left or right child of an internal node
+
+Proper Binary Trees
+- aka full binary trees
+- Where each node has either zero or two children
+- every internal node would have to have exactly two children
+
+Improper Binary Tree
+- tree that is not proper
+
+Binary Tree Use Cases
+- Can represent complex arithmetic expressions
+- decision trees with yes or no answers
+
+Binary Tree Levels
+- level 0 has 1 node, level 1 has 2 nodes, level 2 has 4 nodes, level 3 has 8 nodes, and so on
+- level d has at most 2^d nodes
