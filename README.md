@@ -310,3 +310,34 @@ public static void insertSort(PositionalLinkedList<Integer> list){
   - `access(e)`: Accesses element and adds to favorites list if not already present, and increments access count
   - `remove(e)` removes element from favorites list if present
   - `getFavorites(k)`: returns an iterable collection of the `k` most accessed elements
+
+
+## CH 8 - Trees
+
+Tree
+- ADT that stores elements hierarchically
+- Except for top element (root), each element has a parent element and 0 or more children elements
+
+Leaf nodes
+- aka External nodes
+- nodes that have no children
+
+Edge
+- Pair of nodes such that one node is the parent of the other
+
+Path
+- Sequence of edges
+
+Ordered
+- where there is a meaningful linear order among the children of each node, such that children nodes are ordered from left to right
+
+Depth
+- assuming `p` is a position within Tree `T`, depth of `p` is number of ancestors (parents) of `p`, other than `p` itself
+- depth of tree root would be 0 (because it has no parents)
+- Recursive definition
+  - If p is root, then depth of p is 0
+  - otherwise, the depth of p is 1 + depth of parent of p
+
+Height
+- Height of tree equal to the maximum depth of its leaf elements, or 0 if tree is empty
+  - don't count the root
