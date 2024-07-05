@@ -1,6 +1,6 @@
-package src.main.ch6;
+package ch6;
 
-import src.main.ch3.SinglyLinkedList;
+import ch3.SinglyLinkedList;
 
 // O(1) runtime
 public class QueueSinglyLinked<E> implements Queue<E> {

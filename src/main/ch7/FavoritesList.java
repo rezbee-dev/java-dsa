@@ -1,4 +1,4 @@
-import src.main.ch7.PositionalLinkedList;
+package ch7;
 
 public class FavoritesList<E> {
     PositionalList<Item<E>> list = new PositionalLinkedList<>();

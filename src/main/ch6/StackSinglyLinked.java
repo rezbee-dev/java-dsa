@@ -1,6 +1,6 @@
-package src.main.ch6;
+package ch6;
 
-import src.main.ch3.SinglyLinkedList;
+import ch3.SinglyLinkedList;
 
 public class StackSinglyLinked<E> implements Stack<E>{
     // Using existing class as hidden field rather 

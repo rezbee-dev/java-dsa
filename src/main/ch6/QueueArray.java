@@ -1,4 +1,4 @@
-package src.main.ch6;
+package ch6;
 
 // Uses modulo to allow for circular indexing of queue's front and end positions for dequeue and enqueue operations
 // O(1) runtime for all operations

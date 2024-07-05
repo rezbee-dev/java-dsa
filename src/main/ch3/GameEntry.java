@@ -1,4 +1,4 @@
-package src.main.ch3;
+package ch3;
 
 public class GameEntry {
     private String name;

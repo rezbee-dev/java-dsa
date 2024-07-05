@@ -1,3 +1,5 @@
+package ch7;
+
 // For non-dynamic array, All operations are O(1) time complexity except for add & remove which is O(n)
 // For dynamic array, runtimes are still the same; see ch7.2 for discussions on amortizations regarding the resizing
 // Adding ArrayIterator & Iterator from 7.4

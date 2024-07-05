@@ -1,4 +1,4 @@
-package src.main.ch3;
+package ch3;
 
 import java.util.List;
 import java.util.Random;

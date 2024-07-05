@@ -1,4 +1,4 @@
-package src.main.ch6;
+package ch6;
 
 // A better implementation of Stack<E> is provided in
 // Pros: Simple and very efficient time-wise, O(1) for all operations

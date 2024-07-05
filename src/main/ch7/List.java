@@ -1,3 +1,5 @@
+package ch7;
+
 public interface List<E> {
     int size();
     boolean isEmpty();

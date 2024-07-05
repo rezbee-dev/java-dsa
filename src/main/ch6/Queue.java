@@ -1,3 +1,5 @@
+package ch6;
+
 public interface Queue<E> {
     int size();
     boolean isEmpty();

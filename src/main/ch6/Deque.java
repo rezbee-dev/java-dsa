@@ -1,3 +1,5 @@
+package ch6;
+
 public interface Deque<E> {
     int size();
     boolean isEmpty();

@@ -1,3 +1,5 @@
+package ch7;
+
 public interface PositionalList<E> {
     int size();
     boolean isEmpty();

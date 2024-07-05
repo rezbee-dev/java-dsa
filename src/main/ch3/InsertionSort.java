@@ -1,9 +1,9 @@
-package src.main.ch3;
+package ch3;
 
 import java.util.Arrays;
 
-import src.main.ch7.PositionalLinkedList;
-import src.main.ch7.Position;
+import ch7.PositionalLinkedList;
+import ch7.Position;
 
 
 public class InsertionSort {

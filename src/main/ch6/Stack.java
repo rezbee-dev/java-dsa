@@ -1,4 +1,4 @@
-package src.main.ch6;
+package ch6;
 
 public interface Stack<E> {
     int size();
