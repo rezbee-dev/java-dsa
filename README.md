@@ -372,3 +372,40 @@ Binary Tree Use Cases
 Binary Tree Levels
 - level 0 has 1 node, level 1 has 2 nodes, level 2 has 4 nodes, level 3 has 8 nodes, and so on
 - level d has at most 2^d nodes
+
+### Implementing Trees
+
+**Linked Structure Implementation for Binary Tree**
+
+Node
+- Would contain reference for element stored at a position `p` to the nodes associated  with the children and parent of p
+- if p is root, then parent of p would be null
+- if p does not have left or right child, that field would be null
+
+Fields
+- reference to root
+- counter for number of nodes in tree
+
+**Linked Structure Implementation for General Tree**
+- Unlike binary tree, there is no limit on the number of children for node in a general tree
+- thusly, the node for linked implementation of a tree consists of parent, element, and children container, where container contains variable references to children
+- still O(1) runtime except for calculating height
+
+**Array Based Representation of Binary Tree**
+
+Level numbering Formula
+- Can use function for numbering the positions of tree
+  - this function can in turn be used to calculate array index
+- function produces numbering where numbers increase from left to right, top to bottom
+- the numbering applies to the potential positions of the tree, not the actual shape
+  - so nodes with missing children will result in skips in numbering
+- f(p) (position of p)
+  - if p is root, then f(p) = 0
+  - if p is left child of q, then f(p) = 2f(q) + 1
+  - if p is right child of q, then f(p) = 2f(q) + 2
+- the book does not cover implementing array based adt for binary trees
+- may result in high-space requirements as there may be empty cells that nevertheless has to be defined due to the formula
+- update operations are not efficient, and may take O(n) (ex: removal is O(n) since you shift all the descendants)
+
+### Tree Traversal Algorithms
+- p 352 
