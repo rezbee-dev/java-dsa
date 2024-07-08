@@ -408,4 +408,37 @@ Level numbering Formula
 - update operations are not efficient, and may take O(n) (ex: removal is O(n) since you shift all the descendants)
 
 ### Tree Traversal Algorithms
-- p 352 
+
+Traversal (of tree T)
+- systematic way accessing/ visiting all positions of T
+- O(n) runtime
+
+Preorder Traversals
+- where root of T is visited first, and then subtrees of root's children are traversed recursively
+- if tree is ordered, then subtrees are traversed according to order of children
+  - from left, towards right and bottom
+
+Postorder Traversals
+- Opposite of preorder traversal
+- recursively traverses subtrees of root children first, and then visits root last
+
+Breadth-First Tree
+- where all nodes are visited at depth d, before moving on to depth d+1
+- Ex of application use: game trees
+  - represents the possible chocies of moves that might be made by player or computer during game
+- O(n)
+- Requires use of FIFO
+
+Inorder traversal
+- where nodes are visited from left to right
+  - where node is visited after all nodes in its left and right subtrees are visited
+- only applies to binary search trees
+
+Binary Search Trees (BST)
+- Where nodes are stored in such a way that parent's left child is smaller than itself, and parent's right child is greater than itself
+- See CH11 for more
+
+_skipped applications of Tree traversal algos__
+
+## CH 9 - Priority Queues
+- p377/ 359

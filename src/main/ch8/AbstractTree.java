@@ -1,5 +1,10 @@
 package ch8;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ch6.Queue;
+import ch6.QueueSinglyLinked;
 import ch7.Position;
 
 public abstract class AbstractTree<E> implements Tree<E> {
@@ -50,5 +55,57 @@ public abstract class AbstractTree<E> implements Tree<E> {
             h = Math.max(h, 1 + this.height(c));
         }
         return h;
+    }
+
+    @Override
+    public Iterable<Position<E>> positions() {
+        return this.preorder();
+    }
+
+    // Adds positions of the subtree rooted at Position p, to the given snapshot List
+    private void preorderSubtree(Position<E> p, List<Position<E>> snapshot){
+        snapshot.add(p); // add p before exploring subtrees
+        for (Position<E> c: this.children(p)){
+            preorderSubtree(c, snapshot);
+        }
+    }
+
+    // Returns an iterable collection of positions of the tree, reported in preorder
+    public Iterable<Position<E>> preorder() {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if(this.isEmpty()) this.preorderSubtree(this.root(), snapshot);
+        return snapshot;
+    }
+
+    // Adds positions of subtree rooted at Position p to the given snapshot
+    private void postorderSubtree(Position<E> p, List<Position<E>> snapshot){
+        for(Position<E> c: this.children(p)) postorderSubtree(c, snapshot);
+        snapshot.add(p); // add p after exploring subtrees
+    }
+
+    // Returns iterable collection of positions of the tree, reported in postorder
+    public Iterable<Position<E>> postorder(){
+        List<Position<E>> snapshot = new ArrayList<>();
+        if(!this.isEmpty()) this.postorderSubtree(this.root(), snapshot);
+        return snapshot;
+    }
+
+    // Returns an iterable collection of positions of the tree in breadth-first order
+    public Iterable<Position<E>> breadthFirst() {
+        List<Position<E>> snapshot = new ArrayList<>();
+        
+        if(!this.isEmpty()){
+            Queue<Position<E>> fringe = new QueueSinglyLinked<>();
+            fringe.enqueue(this.root()); // start with root
+            while(!fringe.isEmpty()){
+                Position<E> p = fringe.dequeue(); // remove from front of the queue
+                snapshot.add(p);                  // report current position
+                for(Position<E> c: this.children(p)){
+                    fringe.enqueue(c);            // add children to back of queue
+                }
+            }
+        }
+
+        return snapshot;
     }
 }
