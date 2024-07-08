@@ -441,4 +441,26 @@ Binary Search Trees (BST)
 _skipped applications of Tree traversal algos__
 
 ## CH 9 - Priority Queues
-- p377/ 359
+
+### Priority Queue ADT
+
+- FIFO is not always sufficient
+
+Priority Queue
+- collection of prioritized elements that allows 
+  - arbitrary element insertion
+  - removal of element that has first priority
+- when element is added, elements are assigned a key that denotes priority
+  - lower the value, the higher the priority (for removal)
+  - ex: element of key value 1 will be removed first before element of key value 2
+
+Priority Queue ADT Operations
+- insert(k,v)
+  - creates an entry with key k and value v in priority queue (pq)
+- min()
+  - returns (but not removes) PQ entry (k,v) that has least key
+  - returns null if empty
+- removeMin()
+  - same as min(), but actually removes it
+- size()
+- isEmpty()
